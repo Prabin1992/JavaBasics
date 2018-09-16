@@ -37,18 +37,14 @@ public void deleteStudent(@PathVariable Long id) {
 }
 
 @PutMapping("/student/{id}")
-public ResponseEntity<Object> updateStudent(@RequestBody StudentEntity student, @PathVariable Long id) {
-
-	Optional<StudentEntity> studentOptional = studentRepository.findById(id);
-
-	if (!studentOptional.isPresent())
-		return ResponseEntity.notFound().build();
-
-	student.setId(id);
-	
-	studentRepository.save(student);
-
-	return ResponseEntity.noContent().build();
+public ResponseEntity<Object> updateStudent1(@RequestBody StudentEntity student,@PathVariable(value="id") Long id) {
+    Optional<StudentEntity> student1= studentRepository.findById(id);
+    if (!student1.isPresent()) {
+        return ResponseEntity.badRequest().build();
+    }
+    student.setId(id);
+    StudentEntity studentUpdated =studentRepository.save(student);
+    return ResponseEntity.ok().body(studentUpdated);
 }
 
 }
