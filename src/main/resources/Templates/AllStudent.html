@@ -1,0 +1,46 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>All Students</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Add Students</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Email</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${students.empty}">
+							<td colspan="2">No Students Available</td>
+						</tr>
+						<tr th:each="student : ${students}">
+							<td><span th:text="${student.name}"> Name </span></td>
+							<td><span th:text="${student.email}"> Email </span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<a class="btn btn-success" href="#" th:href="@{/students/create}">
+					Add Students </a> <a class="btn btn-primary" href="#"
+					th:href="@{/students/edit}"
+					th:classappend="${students.empty} ? 'disabled' : ''">
+					EditStudents </a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
